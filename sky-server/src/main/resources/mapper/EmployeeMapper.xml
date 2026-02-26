@@ -2,4 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sky.mapper.EmployeeMapper">
+    <!--
+        分页查询员工信息
+        @param name 员工姓名，用于模糊查询
+        @return Employee 员工实体对象列表
+    -->
+    <select id="pageQuery" resultType="com.sky.entity.Employee">
+        <!-- 查询所有员工信息 -->
+        select * from employee
+        <!-- 动态WHERE条件 -->
+        <where>
+            <!-- 根据姓名进行模糊查询 -->
+            <if test="name != null and name != ''">
+                and name like concat('%',#{name},'%')
+            </if>
+        </where>
+        <!-- 添加排序 -->
+        order by create_Time desc
+    </select>
+
+    <update id="update" parameterType="com.sky.entity.Employee">
+        update employee
+            <!--name, username, password, phone, sex, id_number, status, update_time, update_user-->
+            <set>
+                <if test="name != null">name = #{name}, </if>
+                <if test="username != null">username = #{username},</if>
+                <if test="password != null">password = #{password},</if>
+                <if test="phone != null">phone = #{phone},</if>
+                <if test="sex != null">sex = #{sex},</if>
+                <if test="idNumber != null">id_number = #{idNumber},</if>
+                <if test="status != null">status = #{status},</if>
+                <if test="updateTime != null">update_time = #{updateTime},</if>
+                <if test="updateUser != null">update_user = #{updateUser},</if>
+            </set>
+        where id = #{id}
+    </update>
 </mapper>
