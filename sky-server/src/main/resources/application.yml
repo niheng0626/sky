@@ -28,13 +28,6 @@ logging:
         mapper: debug
         service: info
         controller: info
-# MinIO配置
-minio:
-  endpoint: http://localhost:9000  # MinIO服务器地址
-  accessKey: admin           # 访问密钥
-  secretKey: 123456789        # 秘密密钥
-  # 桶名称已在工具类中固定为 "sky"，此处无需配置
-  external-endpoint: http://192.168.117.129:9000
 
 sky:
   jwt:
@@ -44,3 +37,22 @@ sky:
     admin-ttl: 7200000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+    # 登录用户jwt过期时间
+    user-secret-key: itcast
+    user-ttl: 7200000
+    user-token-name: authentication
+
+  wechat:
+    appid: ${sky.wechat.appid}
+    secret: ${sky.wechat.secret}
+  minio:
+    endpoint: ${sky.minio.endpoint}  # MinIO服务器地址
+    accessKey: ${sky.minio.accessKey}           # 访问密钥
+    secretKey: ${sky.minio.secretKey}        # 秘密密钥
+    # 桶名称已在工具类中固定为 "sky"，此处无需配置
+    external-endpoint: ${sky.minio.external-endpoint}
+  redis:
+    host: ${sky.redis.host}
+    port: ${sky.redis.port}
+    database: ${sky.redis.database}
+

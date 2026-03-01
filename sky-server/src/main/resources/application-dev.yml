@@ -6,3 +6,16 @@ sky:
     database: sky_take_out
     username: niheng
     password: niheng
+  minio:
+    endpoint: http://192.168.117.129:9000  # MinIO服务器地址
+    accessKey: admin           # 访问密钥
+    secretKey: 123456789        # 秘密密钥
+    # 桶名称已在工具类中固定为 "sky"，此处无需配置
+    external-endpoint: http://192.168.117.129:9000
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 10
+  wechat:
+    appid: wx87ff37850d44c364
+    secret: 3c14e6395156ff035aeeb0c01387381c

@@ -29,6 +29,22 @@
         </where>
         order by d.create_time desc
     </select>
+    <select id="list" resultType="com.sky.entity.Dish">
+        select * from dish
+        <where>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+    <!--select a.* from dish a left join setmeal_dish b on a.id = b.dish_id where b.setmeal_id = ?-->
+    <select id="getBySetmealId" resultType="com.sky.entity.Dish">
+        select a.* from dish a left join setmeal_dish b on a.id = b.dish_id where b.setmeal_id = #{setmealId}
+    </select>
 
     <update id="update">
             update dish

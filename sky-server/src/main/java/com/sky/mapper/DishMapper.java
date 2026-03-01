@@ -5,10 +5,12 @@ import com.sky.annotation.AutoFill;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
 import com.sky.enumeration.OperationType;
+import com.sky.vo.DishVO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.Collection;
 import java.util.List;
 
 @Mapper
@@ -37,4 +39,11 @@ public interface DishMapper {
 
     @AutoFill(value = OperationType.UPDATE)
     void update(Dish dish);
+
+    List<Dish> list(Dish dish);
+
+    List<Dish> getBySetmealId(Long id);
+
+    @Select("select count(*) from setmeal s left join setmeal_dish sd on s.id = sd.setmeal_id where s.status = 1 and sd.dish_id = #{id}")
+    Integer getByDishId(Long id);
 }

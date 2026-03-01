@@ -20,7 +20,7 @@ import java.util.UUID;
 @Slf4j
 public class CommonController {
 
-    @Value("${minio.external-endpoint}")
+    @Value("${sky.minio.endpoint}")
     private String minioBaseUrl;
     // 文件上传
     @PostMapping("/upload")
